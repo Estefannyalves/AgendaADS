@@ -1,10 +1,8 @@
-#Agenda Telefonica
 from funcoes import *
 
 opt = 0
 contato = ""
 while opt != 5:
-
     bemvindo()
     opt = int(input("Digite a opção desejada: "))
     print("\n")
