@@ -1,19 +1,24 @@
 #Agenda Telefonica
-import funcoes
+from funcoes import *
 
-funcoes.bemvindo()
+opt = 0
+contato = ""
+while opt != 5:
 
-#Opcoes do Usuario
-opcao = int(raw_input())
-print("Seleccionaste", opcao)
+    bemvindo()
+    opt = int(input("Digite a opção desejada: "))
+    print("\n")
 
-
-#Estrutura de controle
-if opcao == 1:
-	funcoes.adicionar()
-elif opcao == 2:
-	funcoes.listar()
-else:
-	funcoes.falha()
-
-
+    if opt == 1:
+        adicionar()
+    elif opt == 2:
+        listarR()
+    elif opt == 3:
+        deletar()
+    elif opt == 4:
+        contato = input("Insira o nome do contato que será buscado: ")
+        encontrar(contato)
+    elif opt == 5:
+        print("Encerrando aplicação.")
+    elif opt < 1 or opt > 5:
+        falha()
