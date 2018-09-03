@@ -1,74 +1,36 @@
-#Mensagem de Bem Vindo e Opcoes ao Usuario
+import csv       
 
-import csv
-
-
-def back():
-    print("\n")
-    bemvindo()
-	
-	
-
-def bemvindo():
-	print("Bem Vindo a Agenda")
-	print("Selecione uma Opcao")
-	print("1  Adicionar um novo contato")
-	print("2  Listar os contatos da agenda")
-
-
-def adicionar():
-	print("Adicionar um registro")
-	agenda = open("agendatelefonica.csv",'a')
-	nome = raw_input("Nome do Contato:")
-	telefone = raw_input("Digite o telefone:")
-	print("Contato salvo com nome:",nome," e numero",telefone)
-	agenda.write(nome)
-	agenda.write(",")
-	agenda.write(telefone)
-	agenda.write(",")
-	agenda.write("\n")
-	agenda.close()
-	back()
-	
-	
-def listar():
-	print("Lista de Contatos")
-	agenda = open("agendatelefonica.csv")
-	contact = csv.reader(agenda)
-	for y in contact:
-		print (y)
-	print("Listado corretamente")
-	agenda.close()
-	back()
+def deletar():
+        with open("agendatelefonica.csv","r") as agenda:
+                reader = csv.reader(agenda)
+                data = list(reader)
+        nome=str("")
+        while nome not in ([row[0] for row in data]):
+                nome = input("Nome do contato a ser deletado: ")
+        data.pop([row[0] for row in data].index(nome))
+        with open("agendatelefonica.csv","w",newline="") as file:
+                writer = csv.writer(file)
+                for row in data :
+                        writer.writerow(row)
+        print("\n")
+        print("Contato removido com sucesso!!")
+        print("\n")
 
 def falha():
-	print("Opcao Incorreta")
+	print("Selecione uma opção válida.")
+	print("\n")
 
-
-def sairDoPrograma():
-	print("\nA aplicação foi encerrada!")
-	sys.exit()
-
-def buscar():
-	arquivo = csv.reader(open('agenndatelefonica.csv', 'r'))
-	nome = input('Digite o nome procurado: ")
-	for rows in arquivo:
-		     if rows[0] == nome
-		     print("Contato buscado: ", rows)
-    back()
-
-	
-def apagar():
-    agenda = [line for line in open("agendatelefonica.csv")]
-    nomeApagar = input("Digite o nome do contato a ser deletado: ").lower().capitalize()
-    for y in agenda:
-        if nomeApagar in y:
-            agenda.remove(y)
-
-    
-    OutraAgenda= open("agendatelefonica.csv", 'w')
-    OutraAgenda.writelines(agenda)
-    OutraAgenda.close()
-
-    listar()
-
+def encontrar(busca):
+    agenda = open("agendatelefonica.csv")
+    lista = (agenda.readlines())
+    nome = False
+    for i in range (0,len(lista)):
+        if busca in lista[i]:
+                print("\n")
+                print("O contato buscado é: ", lista[i])
+                nome = True
+                
+    if nome == False:
+            print("\n")
+            print("Nome não encontrado")
+            print("\n")
