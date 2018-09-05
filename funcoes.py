@@ -13,12 +13,12 @@ def bemvindo():
 
   
 #Funcoes do processo
-def adicionar():
+def adicionar(nome, telefone):
 	print("Adicionar um novo contato")
 	print("\n")
 	agenda = open("agendatelefonica.csv",'a')
-	nome = input("Nome do Contato:")
-	telefone = input("Digite o telefone:")
+	nome = nome
+	telefone = telefone
 	print("\n")
 	print("Contato salvo com Nome:",nome," e Número:",telefone)
 	agenda.write(nome)
@@ -40,11 +40,10 @@ def listarR():
 	print("\n")
 	agenda.close()     
 
-def deletar():
+def deletar(nome):
         with open("agendatelefonica.csv","r") as agenda:
                 reader = csv.reader(agenda)
                 data = list(reader)
-        nome=str("")
         while nome not in ([row[0] for row in data]):
                 nome = input("Nome do contato a ser deletado: ")
         data.pop([row[0] for row in data].index(nome))
@@ -60,12 +59,12 @@ def falha():
 	print("Selecione uma opção válida.")
 	print("\n")
 
-def encontrar(busca):
+def encontrar(nomebusca):
     agenda = open("agendatelefonica.csv")
     lista = (agenda.readlines())
     nome = False
     for i in range (0,len(lista)):
-        if busca in lista[i]:
+        if nomebusca in lista[i]:
                 print("\n")
                 print("O contato buscado é: ", lista[i])
                 nome = True
